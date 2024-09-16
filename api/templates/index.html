@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">
+            <span class="icon fa-solid fa-laptop"></span>
+        </div>
+        <div class="content">
+            <div class="inner">
+                <h1 class="montserrat animated-text">Hello I'm Sefa</h1>
+                <p style="text-decoration: underline;" class="montserrat">Computer Engineering Student</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#intro">About</a></li>
+                <li><a href="#work">Works</a></li>
+                <li><a href="#about">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+
+        <!-- Intro -->
+        <article id="intro">
+            <h2 class="major">About Me</h2>
+            <span class="image main">
+                <img src="{{ url_for('static', filename='/images/homer.gif') }}" alt="" />
+            </span>
+            <p>As a 2nd-year Computer Engineering student, my goal is to pursue a career that combines my interests and skills in engineering and computing, and to contribute to the advancement of technology and society.</p>
+        </article>
+
+        <!-- Work -->
+        <article id="work">
+            <h2 class="major">Works</h2>
+            <div class="dropdown">
+                <button onclick="toggleDropdown()" class="dropbtn">Small Projects</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <img src="{{ url_for('static', filename='/images/back1.jpg') }}" style="width: 100%;" class="mx-2 my-3" alt="" />
+                    <a href="{{ url_for('dice') }}">Dice Game</a>
+                    <a href="{{ url_for('drum') }}">Drum Kit Game</a>
+                    <a href="{{ url_for('color') }}">Color Game</a>
+                </div>
+            </div> <br></br>
+            <div>
+                <h4 style="text-decoration: underline;">
+                    <a href="https://github.com/sefatuter/Employee-Attrition-Prediction" style="text-decoration: none;">Employee Attrition Prediction</a>
+                </h4>
+                <img src="{{ url_for('static', filename='/images/eap.png') }}" style="width: 100%;" alt="">
+                <p>We developed a machine learning model with collaborative work with my friend to predict employee attrition using various predictive analytics techniques. <br><br>Key Technologies: Python, Pandas, Scikit-Learn, Matplotlib, Streamlit, Jupyter Notebook</p>
+            </div>
+            <hr>
+            <div>
+                <h4 style="text-decoration: underline;">
+                    <a href="https://github.com/sefatuter/flask-management-website" style="text-decoration: none;">Flask Management System</a>
+                </h4>
+                <img src="{{ url_for('static', filename='/images/fms.png') }}" style="width: 100%;" alt="">
+                <p>Web application designed to manage and streamline organizational tasks with a robust interface. <br><br>
+                    Technologies Used: Python, Flask, HTML, CSS, JavaScript, SQLAlchemy, Jinja2</p>
+            </div>
+            <hr>
+            <div>
+                <h4 style="text-decoration: underline;">
+                    <a href="https://github.com/sefatuter/flask-management-website" style="text-decoration: none;">Blog Website</a>
+                </h4>
+                <img src="{{ url_for('static', filename='/images/bws.png') }}" style="width: 100%;" alt="">
+                <p>Web application designed to manage and share blog posts with a user-friendly interface.<br><br>
+                    Technologies Used: JavaScript, EJS, HTML, CSS, Bootstrap, Node.js, MySQL</p>
+            </div>
+        </article>
+
+        <!-- Skills -->
+        <article id="about">
+            <h2 class="major">Skills</h2>
+            <span class="image main">
+                <img src="{{ url_for('static', filename='/images/backgroundUpdated.jpg') }}" alt="" />Data Science & Development
+            </span>
+            <p>I started using computers when I was a child, and as I got older, I decided to combine it with programming. Over time I have gained a lot of experience.</p>
+            <p>Some of the skills I have are communication, problem solving, learning skills, being able to learn new things quickly and continuously.</p>
+            <hr>
+            <p><span>Technologies I Used:</span> <br> NPM, node.js, HTML, CSS, Bootstrap, Git, GitHub, SQL, MySQL, express.js, Docker, Flask, NumPy, Pandas, scikit-learn, Matplotlib libraries, Web Application Development Using Flask, JavaScript.</p>
+        </article>
+
+        <!-- Contact -->
+        <article id="contact">
+            <h2 class="major">Contact</h2>
+            <form method="post" action="{{ url_for('submit_form') }}">
+                <div class="fields">
+                    <div class="field half">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" />
+                    </div>
+                    <div class="field half">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" />
+                    </div>
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" rows="4"></textarea>
+                    </div>
+                </div>
+                <ul class="actions">
+                    <li><input type="submit" value="Send Message" class="primary" /></li>
+                    <li><input type="reset" value="Reset" /></li>
+                </ul>
+            </form>
+            <ul class="icons">
+                <li><a href="https://www.linkedin.com/in/sefatuter/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                <li><a href="https://github.com/sefatuter" class="icon fa-github"><span class="label">GitHub</span></a></li>
+            </ul>
+        </article>
+    </div>
+
+    <div class="content montserrat" style="font-weight: 200;">
+        <p>Hi! Thank you for taking the time to look at my profile</p>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p class="copyright">&copy; sefatuter.</p>
+    </footer>
+
+</div>
+
+<!-- BG -->
+<div id="bg"></div>
+
+
+
+
+<!-- Scripts -->
+<script src="{{ url_for('static', filename='/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/js/browser.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/js/breakpoints.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/js/util.js') }}"></script>
+<script src="{{ url_for('static', filename='/js/main.js') }}"></script>
+
+<script>
+    function toggleDropdown() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}
