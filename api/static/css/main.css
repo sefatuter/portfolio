@@ -106,7 +106,7 @@ input, select, textarea {
 /* Type */
 
 	html {
-		font-size: 16pt;
+		font-size: 13pt;
 	}
 
 		@media screen and (max-width: 1680px) {
@@ -569,12 +569,11 @@ input, select, textarea {
 
 /* Box */
 
-	.box {
-		border-radius: 4px;
-		border: solid 1px #ffffff;
-		margin-bottom: 2rem;
-		padding: 1.5em;
-	}
+.box {
+    border-radius: 3px; /* 4px yerine */
+    padding: 1.25em; /* 1.5em yerine */
+    margin-bottom: 1.5rem; /* 2rem yerine */
+}
 
 		.box > :last-child,
 		.box > :last-child > :last-child,
@@ -612,7 +611,8 @@ input, select, textarea {
 /* Image */
 
 	.image {
-		border-radius: 4px;
+		border-radius: 3px;
+    	margin: 0 0 1.5rem 0;
 		border: 0;
 		display: inline-block;
 		position: relative;
@@ -627,7 +627,7 @@ input, select, textarea {
 			display: block;
 			height: 100%;
 			left: 0;
-			opacity: 0.5;
+			opacity: 0.4;
 			position: absolute;
 			top: 0;
 			width: 100%;
@@ -639,7 +639,7 @@ input, select, textarea {
 		}
 
 		.image.left, .image.right {
-			max-width: 40%;
+			max-width: 45%;
 		}
 
 			.image.left img, .image.right img {
@@ -670,7 +670,7 @@ input, select, textarea {
 
 		.image.main {
 			display: block;
-			margin: 2.5rem 0;
+			margin: 2rem 0; /* 2.5rem yerine */
 			width: 100%;
 		}
 
@@ -785,7 +785,7 @@ input, select, textarea {
 		}
 
 			ul.actions.stacked li {
-				padding: 1.3rem 0 0 0;
+				padding: 1rem 0 0 0;
 			}
 
 				ul.actions.stacked li:first-child {
@@ -836,7 +836,7 @@ input, select, textarea {
 					-webkit-flex-shrink: 1;
 					-ms-flex-shrink: 1;
 					flex-shrink: 1;
-					padding: 1rem 0 0 0;
+					padding: 0.75rem 0 0 0;
 					text-align: center;
 					width: 100%;
 				}
@@ -869,6 +869,10 @@ input, select, textarea {
 
 /* Icons */
 
+ul, ol {
+    margin: 0 0 1.5rem 0;
+}
+
 	ul.icons {
 		cursor: default;
 		list-style: none;
@@ -877,7 +881,7 @@ input, select, textarea {
 
 		ul.icons li {
 			display: inline-block;
-			padding: 0 0.75em 0 0;
+			padding: 0 0.5em 0 0;
 		}
 
 			ul.icons li:last-child {
@@ -888,10 +892,10 @@ input, select, textarea {
 				border-radius: 100%;
 				box-shadow: inset 0 0 0 1px #ffffff;
 				display: inline-block;
-				height: 2.25rem;
-				line-height: 2.25rem;
+				height: 2rem;
+				line-height: 2rem;
 				text-align: center;
-				width: 2.25rem;
+				width: 2rem;
 			}
 
 				ul.icons li a:hover {
@@ -910,7 +914,7 @@ input, select, textarea {
 	}
 
 	table {
-		margin: 0 0 2rem 0;
+		margin: 0 0 1.5rem 0;
 		width: 100%;
 	}
 
@@ -925,14 +929,14 @@ input, select, textarea {
 			}
 
 		table td {
-			padding: 0.75em 0.75em;
+			padding: 0.6em;
 		}
 
 		table th {
 			color: #ffffff;
-			font-size: 0.9em;
+			font-size: 0.85em;
 			font-weight: 600;
-			padding: 0 0.75em 0.75em 0.75em;
+			padding: 0 0.6em 0.6em 0.6em;
 			text-align: left;
 		}
 
@@ -994,11 +998,11 @@ input, select, textarea {
 		display: inline-block;
 		font-size: 0.8rem;
 		font-weight: 300;
-		height: 2.75rem;
+		height: 2.5rem;
 		letter-spacing: 0.2rem;
-		line-height: 2.75rem;
+		line-height: 2.5rem;
 		outline: 0;
-		padding: 0 1.25rem 0 1.35rem;
+		padding: 0 1rem 0 1.15rem;
 		text-align: center;
 		text-decoration: none;
 		text-transform: uppercase;
@@ -1645,27 +1649,39 @@ input, select, textarea {
 	font-size: 18,8px;
 }
 
-  .animated-text {
-	width: 22ch;
-	animation: typing 2s steps(22),  infinite alternate;
-	white-space: nowrap;
-	overflow: hidden;
-	border-right: 3px transparent;
+/* Typing Animation Container */
+.animated-text {
 	font-size: 2em;
+	display: inline-block;
+	width: fit-content;
+	position: relative;
+	white-space: nowrap;
+	border-right: 2px solid transparent;
+	margin: 0 auto;
+	animation: 
+	  typing 3s steps(22) 1s forwards,
+	  blink 0.8s steps(22) infinite;
+	overflow: hidden;
   }
   
+  /* Typing Animation */
   @keyframes typing {
-	from {
-	  width: 0
-	}
+	from { width: 0 }
+	to { width: 100% }
   }
-	  
+  
+  /* Cursor Blink Animation */
   @keyframes blink {
-	50% {
-	  border-color: transparent
-	}
+	0%, 100% { border-color: transparent }
+	50% { border-color: #ffffff }
   }
-
+  
+  /* Add this to HTML to ensure proper sizing */
+  .animated-text::before {
+	content: "Hello I'm Sefa";
+	visibility: hidden;
+	position: absolute;
+  }
 
   
   /* Dropdown Button */
