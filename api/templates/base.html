@@ -39,6 +39,10 @@
             }
         }
     </script>
+    <script type="module">
+        import { inject } from "https://cdn.jsdelivr.net/npm/@vercel/analytics@latest/dist/index.mjs";
+        inject();
+    </script>
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
     <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>    
