@@ -1879,3 +1879,49 @@ ul, ol {
     transform: translateY(0px);
   }
 }
+
+.flash-messages {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: auto;
+    max-width: 90%;
+    text-align: center;
+}
+
+.alert {
+    display: inline-block;
+    padding: 15px 25px;
+    margin: 5px 0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease-in-out;
+}
+
+.alert-success {
+    background-color: #28a745;
+    color: white;
+    border: 1px solid #218838;
+}
+
+.alert-error {
+    background-color: #dc3545;
+    color: white;
+    border: 1px solid #c82333;
+}
+
+/* Fade-out effect */
+.flash-messages .alert {
+    opacity: 1;
+    animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
