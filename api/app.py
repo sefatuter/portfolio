@@ -18,7 +18,7 @@ app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 
 RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
 RECAPTCHA_SITE_KEY = os.getenv('RECAPTCHA_SITE_KEY')
-# Initialize Flask-Mail
+
 mail = Mail(app)
 
 @app.route('/')
