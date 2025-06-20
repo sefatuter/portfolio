@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
+{% block title %}Sefa Tuter - Computer Engineering Student{% endblock %}
+
 {% block content %}
 
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
-    <div class="flash-messages">
+    <div class="flash-messages" role="alert" aria-live="polite">
       {% for category, message in messages %}
       <div class="alert alert-{{ messages[0][0] }}">{{ messages[0][1] }}</div>  <!-- Show only the first message -->
       {% endfor %}
@@ -16,9 +18,9 @@
 <div id="wrapper">
 
     <!-- Header -->
-    <header id="header">
-        <div class="logo">
-            <span class="icon fa-solid fa-laptop"></span>
+    <header id="header" role="banner">
+        <div class="logo" role="img" aria-label="Portfolio Logo">
+            <span class="icon fa-solid fa-laptop" aria-hidden="true"></span>
         </div>
         <div class="content">
             <div class="inner">
@@ -26,127 +28,217 @@
                 <p style="text-decoration: underline;" class="montserrat">Computer Engineering Student</p>
             </div>
         </div>
-        <nav>
+        <nav role="navigation" aria-label="Main navigation">
             <ul>
-                <li><a href="#intro">About</a></li>
-                <li><a href="#work">Works</a></li>
-                <li><a href="#about">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#intro" aria-label="Learn about me">About</a></li>
+                <li><a href="#work" aria-label="View my projects">Works</a></li>
+                <li><a href="#about" aria-label="See my technical skills">Skills</a></li>
+                <li><a href="#contact" aria-label="Get in touch">Contact</a></li>
             </ul>
         </nav>
-
     </header>
 
-    <!-- Main -->
-    <div id="main">
+    <!-- Main Content -->
+    <main id="main" role="main">
 
-        <!-- Intro -->
-        <article id="intro">
-            <h2 class="major">About Me</h2>
+        <!-- About Section -->
+        <article id="intro" role="article" aria-labelledby="about-heading">
+            <h2 id="about-heading" class="major">About Me</h2>
             <span class="image main">
-                <img src="{{ url_for('static', filename='/images/homer.gif') }}" alt="" />
+                <img src="{{ url_for('static', filename='/images/homer.gif') }}" alt="Animated character representing my personality" />
             </span>
             <p>As a 3rd-year Computer Engineering student, my goal is to pursue a career that leverages my growing expertise and passion for engineering and computing, enabling me to contribute meaningfully to technological innovation and societal advancement.</p>
         </article>
 
-        <!-- Work -->
-        <article id="work">
-            <h2 class="major">Works</h2>
-            <div>
-                <h4 style="text-decoration: underline;">
-                    <a href="https://github.com/sefatuter/ChatDocs" style="text-decoration: none;">ChatDocs - Assistant</a>
-                </h4>
-                <img src="{{ url_for('static', filename='/images/chatdoc.png') }}" style="width: 100%;" alt="">
-                <p>I developed ChatDocs, a web-based platform that enables secure, on-premise document interaction. 
-                    The platform allows users to upload PDFs or website links and retrieve AI-driven responses based on the content, 
-                    ensuring that sensitive information stays within the user’s environment. By running entirely on the user's own server, 
-                    there is no reliance on external cloud services or third parties, providing enhanced privacy and security.
-                    <br><br> Key Technologies: Python, Flask, LangChain, PostgreSQL, Pgvector, Ollama, Docker, Docker Compose</p>
-            </div>
-            <hr>
-            <div>
-                <h4 style="text-decoration: underline;">
-                    <a href="https://github.com/sefatuter/Labris-flask" style="text-decoration: none;">Secured User System</a>
-                </h4>
-                <img src="{{ url_for('static', filename='/images/user-syst.png') }}" style="width: 100%;" alt="">
-                <p>I deployed a dynamic Flask web app using uWSGI, Nginx, and ModSecurity for enhanced security. The app is containerized and served over HTTPS via Nginx with ModSecurity.<br><br>Key Technologies: Python, Flask, Nginx, ModSecurity, Docker, Ansible, PostgreSQL, uWSGI, HTML, CSS</p>
-            </div>
-            <hr>
-            <div>
-                <h4 style="text-decoration: underline;">
-                    <a href="https://github.com/sefatuter/Employee-Attrition-Prediction" style="text-decoration: none;">Employee Attrition Prediction</a>
-                </h4>
-                <img src="{{ url_for('static', filename='/images/eap.png') }}" style="width: 100%;" alt="">
-                <p>We developed a machine learning model with collaborative work with my friend to predict employee attrition using various predictive analytics techniques. <br><br>Key Technologies: Python, Pandas, Scikit-Learn, Matplotlib, Streamlit, Jupyter Notebook</p>
-            </div>
-            <hr>
-            <div>
-                <h4 style="text-decoration: underline;">
-                    <a href="https://github.com/sefatuter/flask-management-website" style="text-decoration: none;">Flask Management System</a>
-                </h4>
-                <img src="{{ url_for('static', filename='/images/fms.png') }}" style="width: 100%;" alt="">
-                <p>Web application designed to manage and streamline organizational tasks with a robust interface. <br><br>
-                    Technologies Used: Python, Flask, HTML, CSS, JavaScript, SQLAlchemy, Jinja2</p>
-            </div>
-            <hr>
-            <div>
-                <h4 style="text-decoration: underline;">
-                    <a href="https://github.com/sefatuter/flask-management-website" style="text-decoration: none;">Blog Website</a>
-                </h4>
-                <img src="{{ url_for('static', filename='/images/bws.png') }}" style="width: 100%;" alt="">
-                <p>Web application designed to manage and share blog posts with a user-friendly interface.<br><br>
-                    Technologies Used: JavaScript, EJS, HTML, CSS, Bootstrap, Node.js, MySQL</p>
-            </div>
-            <hr>
-            <div>
-                <h4 style="text-decoration: underline;">
-                    <a href="https://github.com/sefatuter/Intern-works" style="text-decoration: none;">Various Tasks</a>
-                </h4>
-                <img src="{{ url_for('static', filename='/images/bann.png') }}" style="width: 100%;" alt="">
-                <p>It includes the topics I taught myself during my internship.<br><br>
-                    Technologies Used: Iptables firewall, Nginx, ModSecurity, Flask, CentOS8, Bash, Linux, Postman, PostgreSQL, Selenium, Vagrant, Ansible, Wireshark, Scapy</p>
-            </div>
+        <!-- Projects Section -->
+        <article id="work" role="article" aria-labelledby="works-heading">
+            <h2 id="works-heading" class="major">Works</h2>
+            
+            <section class="project-item">
+                <h3 class="project-title">
+                    <a href="https://github.com/sefatuter/ChatDocs" target="_blank" rel="noopener noreferrer" aria-label="Visit ChatDocs project on GitHub">ChatDocs - Assistant</a>
+                </h3>
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='/images/chatdoc.png') }}" alt="ChatDocs application interface screenshot" />
+                </div>
+                <div class="project-description">
+                    <p>I developed ChatDocs, a web-based platform that enables secure, on-premise document interaction. 
+                        The platform allows users to upload PDFs or website links and retrieve AI-driven responses based on the content, 
+                        ensuring that sensitive information stays within the user's environment. By running entirely on the user's own server, 
+                        there is no reliance on external cloud services or third parties, providing enhanced privacy and security.</p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong> Python, Flask, LangChain, PostgreSQL, Pgvector, Ollama, Docker, Docker Compose
+                    </div>
+                </div>
+            </section>
 
-            <div class="dropdown">
-                <button onclick="toggleDropdown()" class="dropbtn">Small Projects</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <img src="{{ url_for('static', filename='/images/back1.jpg') }}" style="width: 100%;" class="mx-2 my-3" alt="" />
-                    <a href="{{ url_for('dice') }}">Dice Game</a>
-                    <a href="{{ url_for('drum') }}">Drum Kit Game</a>
-                    <a href="{{ url_for('color') }}">Color Game</a>
+            <hr>
+
+            <section class="project-item">
+                <h3 class="project-title">
+                    <a href="https://github.com/sefatuter/modproject" target="_blank" rel="noopener noreferrer" aria-label="Visit modproject project on GitHub">ModProject</a>
+                </h3>
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='/images/modproj.png') }}" alt="ModProject application interface screenshot" />
+                </div>
+                <div class="project-description">
+                    <p>ModProject is an AI-powered Web Application Firewall (WAF) admin panel for ModSecurity, enabling dynamic rule creation, intuitive editing, and minimal manual intervention through a smart web interface.                    </p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong> Flask, PostgreSQL, HTML, CSS, JavaScript, Bootstrap, Python, ModSecurity, Nginx, OpenWebUI, Ollama, Linux
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <section class="project-item">
+                <h3 class="project-title">
+                    <a href="https://github.com/sefatuter/Labris-flask" target="_blank" rel="noopener noreferrer" aria-label="Visit Secured User System project on GitHub">Secured User System</a>
+                </h3>
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='/images/user-syst.png') }}" alt="Secured user system interface screenshot" />
+                </div>
+                <div class="project-description">
+                    <p>I deployed a dynamic Flask web app using uWSGI, Nginx, and ModSecurity for enhanced security. The app is containerized and served over HTTPS via Nginx with ModSecurity.</p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong> Python, Flask, Nginx, ModSecurity, Docker, Ansible, PostgreSQL, uWSGI, HTML, CSS
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <section class="project-item">
+                <h3 class="project-title">
+                    <a href="https://github.com/sefatuter/Employee-Attrition-Prediction" target="_blank" rel="noopener noreferrer" aria-label="Visit Employee Attrition Prediction project on GitHub">Employee Attrition Prediction</a>
+                </h3>
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='/images/eap.png') }}" alt="Employee attrition prediction dashboard screenshot" />
+                </div>
+                <div class="project-description">
+                    <p>We developed a machine learning model with collaborative work with my friend to predict employee attrition using various predictive analytics techniques.</p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong> Python, Pandas, Scikit-Learn, Matplotlib, Streamlit, Jupyter Notebook
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <section class="project-item">
+                <h3 class="project-title">
+                    <a href="https://github.com/sefatuter/flask-management-website" target="_blank" rel="noopener noreferrer" aria-label="Visit Flask Management System project on GitHub">Flask Management System</a>
+                </h3>
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='/images/fms.png') }}" alt="Flask management system interface screenshot" />
+                </div>
+                <div class="project-description">
+                    <p>Web application designed to manage and streamline organizational tasks with a robust interface.</p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong> Python, Flask, HTML, CSS, JavaScript, SQLAlchemy, Jinja2
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <section class="project-item">
+                <h3 class="project-title">
+                    <a href="https://github.com/sefatuter/flask-management-website" target="_blank" rel="noopener noreferrer" aria-label="Visit Blog Website project on GitHub">Blog Website</a>
+                </h3>
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='/images/bws.png') }}" alt="Blog website interface screenshot" />
+                </div>
+                <div class="project-description">
+                    <p>Web application designed to manage and share blog posts with a user-friendly interface.</p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong> JavaScript, EJS, HTML, CSS, Bootstrap, Node.js, MySQL
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <section class="project-item">
+                <h3 class="project-title">
+                    <a href="https://github.com/sefatuter/Intern-works" target="_blank" rel="noopener noreferrer" aria-label="Visit various internship tasks on GitHub">Various Tasks</a>
+                </h3>
+                <div class="project-image">
+                    <img src="{{ url_for('static', filename='/images/bann.png') }}" alt="Collection of internship projects banner" />
+                </div>
+                <div class="project-description">
+                    <p>It includes the topics I taught myself during my internship.</p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong> Iptables firewall, Nginx, ModSecurity, Flask, CentOS8, Bash, Linux, Postman, PostgreSQL, Selenium, Vagrant, Ansible, Wireshark, Scapy
+                    </div>
+                </div>
+            </section>
+
+            <section class="small-projects">
+                <div class="dropdown">
+                    <button onclick="toggleDropdown()" class="dropbtn" aria-expanded="false" aria-haspopup="true" aria-label="Toggle small projects menu">Small Projects</button>
+                    <div id="myDropdown" class="dropdown-content" role="menu">
+                        <img src="{{ url_for('static', filename='/images/back1.jpg') }}" alt="Small projects showcase" class="mx-2 my-3" />
+                        <a href="{{ url_for('dice') }}" role="menuitem">Dice Game</a>
+                        <a href="{{ url_for('drum') }}" role="menuitem">Drum Kit Game</a>
+                        <a href="{{ url_for('color') }}" role="menuitem">Color Game</a>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <!-- Skills Section -->
+        <article id="about" role="article" aria-labelledby="skills-heading">
+            <h2 id="skills-heading" class="major">Skills</h2>
+            <span class="image main">
+                <img src="{{ url_for('static', filename='/images/backgroundUpdated.jpg') }}" alt="Development workspace background" />
+            </span>
+            <div class="skills-content">
+                <p>I started using computers when I was a child, and as I got older, I decided to combine it with programming. Over time I have gained a lot of experience.</p>
+                <p>Some of the skills I have are communication, problem solving, learning skills, being able to learn new things quickly and continuously.</p>
+                
+                <hr>
+                
+                <div class="technical-skills">
+                    <h3>Technical Skills</h3>
+                    <div class="tech-categories">
+                        <div class="tech-category">
+                            <h4>Backend Development</h4>
+                            <p>Flask, Python, SQL, PostgreSQL, MySQL</p>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Frontend Development</h4>
+                            <p>HTML, CSS, JavaScript, Bootstrap</p>
+                        </div>
+                        <div class="tech-category">
+                            <h4>DevOps & Infrastructure</h4>
+                            <p>Docker, Nginx, ModSecurity, Git, GitHub</p>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Data Science</h4>
+                            <p>NumPy, Pandas, Machine Learning</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <br><br>
         </article>
 
-        <!-- Skills -->
-        <article id="about">
-            <h2 class="major">Skills</h2>
-            <span class="image main">
-                <img src="{{ url_for('static', filename='/images/backgroundUpdated.jpg') }}" alt="" />Development
-            </span>
-            <p>I started using computers when I was a child, and as I got older, I decided to combine it with programming. Over time I have gained a lot of experience.</p>
-            <p>Some of the skills I have are communication, problem solving, learning skills, being able to learn new things quickly and continuously.</p>
-            <hr>
-            <p><span>Technologies I Used:</span> <br> Flask, HTML, CSS, Bootstrap, Git, GitHub, SQL, MySQL, Docker, NumPy, Pandas, Nginx, ModSecurity, PostgreSQL, Web Application Development Using Flask, JavaScript.</p>
-        </article>
-
-        <!-- Contact -->
-        <article id="contact">
-            <h2 class="major">Contact</h2>
-            <form method="post" action="{{ url_for('submit_form') }}" onsubmit="return validateForm();">
+        <!-- Contact Section -->
+        <article id="contact" role="article" aria-labelledby="contact-heading">
+            <h2 id="contact-heading" class="major">Contact</h2>
+            <form method="post" action="{{ url_for('submit_form') }}" onsubmit="return validateForm();" novalidate>
                 <div class="fields">
                     <div class="field half">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" />
+                        <label for="name">Name <span class="required" aria-label="required">*</span></label>
+                        <input type="text" name="name" id="name" required aria-describedby="name-error" />
                     </div>
                     <div class="field half">
-                        <label for="email">Email</label>
-                        <input type="text" name="email" id="email" />
+                        <label for="email">Email <span class="required" aria-label="required">*</span></label>
+                        <input type="email" name="email" id="email" required aria-describedby="email-error" />
                     </div>
                     <div class="field">
-                        <label for="message">Message</label>
-                        <textarea name="message" id="message" rows="4"></textarea>
+                        <label for="message">Message <span class="required" aria-label="required">*</span></label>
+                        <textarea name="message" id="message" rows="4" required aria-describedby="message-error"></textarea>
                     </div>
                 </div>
 
@@ -158,32 +250,32 @@
                 </ul>
             </form>
 
-            <ul class="icons">
-                <li><a href="https://www.linkedin.com/in/sefatuter/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                <li><a href="https://github.com/sefatuter" class="icon fa-github"><span class="label">GitHub</span></a></li>
-            </ul>
+            <div class="social-links">
+                <h3>Connect with me</h3>
+                <ul class="icons">
+                    <li><a href="https://www.linkedin.com/in/sefatuter/" class="icon fa-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Visit my LinkedIn profile"><span class="label">LinkedIn</span></a></li>
+                    <li><a href="https://github.com/sefatuter" class="icon fa-github" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile"><span class="label">GitHub</span></a></li>
+                </ul>
+            </div>
         </article>
-    </div>
+    </main>
 
-    <div class="content montserrat" style="font-weight: 200;">
+    <div class="content montserrat thank-you-message" style="font-weight: 200;">
         <p>Hi! Thank you for taking the time to look at my profile</p>
     </div>
 
     <!-- Footer -->
-    <footer id="footer">
-        <p class="copyright">&copy; sefatuter.</p>
+    <footer id="footer" role="contentinfo">
+        <p class="copyright">&copy; 2024 Sefa Tuter. All rights reserved.</p>
     </footer>
 
 </div>
 
-<!-- BG -->
-<div id="bg"></div>
-
-
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
+<!-- Background -->
+<div id="bg" aria-hidden="true"></div>
 
 <!-- Scripts -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="{{ url_for('static', filename='/js/jquery.min.js') }}"></script>
 <script src="{{ url_for('static', filename='/js/browser.min.js') }}"></script>
 <script src="{{ url_for('static', filename='/js/breakpoints.min.js') }}"></script>
@@ -191,69 +283,187 @@
 <script src="{{ url_for('static', filename='/js/main.js') }}"></script>
 
 <script>
-    function toggleDropdown() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
+    // Portfolio functionality module
+    const Portfolio = {
+        // Dropdown functionality
+        dropdown: {
+            toggle: function() {
+                const dropdown = document.getElementById("myDropdown");
+                const button = document.querySelector('.dropbtn');
+                const isExpanded = dropdown.classList.contains('show');
+                
+                dropdown.classList.toggle("show");
+                button.setAttribute('aria-expanded', !isExpanded);
+            },
+            
+            closeOnOutsideClick: function(event) {
+                if (!event.target.matches('.dropbtn')) {
+                    const dropdowns = document.getElementsByClassName("dropdown-content");
+                    const button = document.querySelector('.dropbtn');
+                    
+                    for (let i = 0; i < dropdowns.length; i++) {
+                        const openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                            button.setAttribute('aria-expanded', 'false');
+                        }
+                    }
                 }
             }
+        },
+
+        // Form validation
+        form: {
+            validate: function() {
+                const name = document.getElementById("name").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const message = document.getElementById("message").value.trim();
+                const recaptchaResponse = grecaptcha.getResponse();
+
+                // Clear previous error states
+                Portfolio.form.clearErrors();
+
+                let isValid = true;
+
+                if (name === "") {
+                    Portfolio.form.showError("name", "Name is required");
+                    isValid = false;
+                }
+
+                if (email === "") {
+                    Portfolio.form.showError("email", "Email is required");
+                    isValid = false;
+                } else if (!Portfolio.form.isValidEmail(email)) {
+                    Portfolio.form.showError("email", "Please enter a valid email address");
+                    isValid = false;
+                }
+
+                if (message === "") {
+                    Portfolio.form.showError("message", "Message is required");
+                    isValid = false;
+                }
+
+                if (recaptchaResponse.length === 0) {
+                    Portfolio.utils.flashMessage("Please complete the reCAPTCHA verification.", "danger");
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    Portfolio.utils.flashMessage("Please correct the errors below.", "danger");
+                }
+
+                return isValid;
+            },
+
+            isValidEmail: function(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            },
+
+            showError: function(fieldId, message) {
+                const field = document.getElementById(fieldId);
+                field.classList.add('error');
+                field.setAttribute('aria-invalid', 'true');
+                
+                // Create or update error message
+                let errorElement = document.getElementById(fieldId + '-error');
+                if (!errorElement) {
+                    errorElement = document.createElement('div');
+                    errorElement.id = fieldId + '-error';
+                    errorElement.className = 'field-error';
+                    errorElement.setAttribute('role', 'alert');
+                    field.parentNode.appendChild(errorElement);
+                }
+                errorElement.textContent = message;
+            },
+
+            clearErrors: function() {
+                const errorElements = document.querySelectorAll('.field-error');
+                const errorFields = document.querySelectorAll('.error');
+                
+                errorElements.forEach(el => el.remove());
+                errorFields.forEach(field => {
+                    field.classList.remove('error');
+                    field.removeAttribute('aria-invalid');
+                });
+            }
+        },
+
+        // Utility functions
+        utils: {
+            flashMessage: function(message, type) {
+                // Remove existing flash messages
+                const existingFlash = document.querySelector('.flash-messages');
+                if (existingFlash) {
+                    existingFlash.remove();
+                }
+
+                // Create new flash message
+                const flashContainer = document.createElement('div');
+                flashContainer.className = 'flash-messages';
+                flashContainer.setAttribute('role', 'alert');
+                flashContainer.setAttribute('aria-live', 'polite');
+                
+                const alertDiv = document.createElement('div');
+                alertDiv.className = `alert alert-${type}`;
+                alertDiv.textContent = message;
+                
+                flashContainer.appendChild(alertDiv);
+                document.body.insertBefore(flashContainer, document.body.firstChild);
+
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    if (flashContainer.parentNode) {
+                        flashContainer.style.transition = "opacity 0.5s ease-out";
+                        flashContainer.style.opacity = "0";
+                        setTimeout(() => flashContainer.remove(), 500);
+                    }
+                }, 5000);
+            }
+        },
+
+        // Initialize portfolio functionality
+        init: function() {
+            // Set up event listeners
+            window.addEventListener('click', this.dropdown.closeOnOutsideClick);
+            
+            // Form submission handling
+            const form = document.querySelector("form");
+            if (form) {
+                const submitButton = form.querySelector("input[type='submit']");
+                
+                form.addEventListener("submit", function(event) {
+                    if (!Portfolio.form.validate()) {
+                        event.preventDefault();
+                        return false;
+                    }
+                    
+                    // Disable submit button to prevent double submission
+                    submitButton.disabled = true;
+                    submitButton.value = "Sending...";
+                    
+                    // Re-enable button after timeout
+                    setTimeout(() => {
+                        submitButton.disabled = false;
+                        submitButton.value = "Send Message";
+                    }, 5000);
+                });
+            }
         }
+    };
+
+    // Global functions for backwards compatibility
+    function toggleDropdown() {
+        Portfolio.dropdown.toggle();
     }
 
     function validateForm() {
-        var name = document.getElementById("name").value.trim();
-        var email = document.getElementById("email").value.trim();
-        var message = document.getElementById("message").value.trim();
-        var recaptchaResponse = grecaptcha.getResponse();
-
-        if (name === "" || email === "" || message === "") {
-            flashMessage("Please fill out all fields before submitting.", "danger");
-            return false;
-        }
-
-        if (recaptchaResponse.length === 0) {
-            flashMessage("Please complete the reCAPTCHA verification.", "danger");
-            return false;
-        }
-
-        return true;
+        return Portfolio.form.validate();
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.querySelector("form");
-        const submitButton = form.querySelector("input[type='submit']");
-        const flashContainer = document.getElementById("flash-container");
-
-        form.addEventListener("submit", function (event) {
-            // Prevent duplicate messages
-            if (flashContainer) {
-                flashContainer.remove();
-            }
-
-            // Disable submit button to prevent multiple clicks
-            submitButton.disabled = true;
-            submitButton.value = "Sending...";  // Optional: change button text
-
-            // Automatically remove flash messages after 5 seconds
-            setTimeout(function () {
-                let flashMessage = document.querySelector(".flash-messages");
-                if (flashMessage) {
-                    flashMessage.style.transition = "opacity 0.5s ease-out";
-                    flashMessage.style.opacity = "0";
-                    setTimeout(() => flashMessage.remove(), 500); // Remove after fade-out
-                }
-                submitButton.disabled = false;  // Re-enable button after timeout
-                submitButton.value = "Send Message";
-            }, 5000); // Adjust timing as needed
-        });
+    // Initialize when DOM is ready
+    document.addEventListener("DOMContentLoaded", function() {
+        Portfolio.init();
     });
 </script>
 

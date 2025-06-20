@@ -3,12 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Welcome{% endblock %}</title>
+    <meta name="description" content="Sefa Tuter - Computer Engineering Student | View my portfolio and projects.">
+    <meta name="keywords" content="Computer Engineering, Portfolio">
+    <meta name="author" content="Sefa Tuter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}Sefa Tuter - Computer Engineering Student{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Computer Engineering Student{% endblock %}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:site_name" content="Sefa Tuter Portfolio">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="{% block twitter_title %}Sefa Tuter - Computer Engineering Student{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}Computer Engineering Student{% endblock %}">
+    
+    <title>{% block title %}{% endblock %}</title>
+    
+    <!-- Title Animation Script -->
     <script>
         window.onload = function () {
-            const defaultTitle = document.title; // Get the current title
+            const currentTitle = document.title;
+            const isHomePage = currentTitle.includes("Computer Engineering Student") || currentTitle === "Welcome";
 
-            if (defaultTitle === "Welcome") {
+            if (isHomePage) {
                 const titles = [
                     "Welcome",          // English
                     "Bienvenido",       // Spanish
@@ -19,15 +39,15 @@
 
                 let currentTitleIndex = 0;
                 let position = 0;
-                const slideDelay = 1000; // Speed of sliding effect
-                const eraseDelay = 1000; // Time to hold the full text before erasing
+                const slideDelay = 1000;
+                const eraseDelay = 1000;
 
                 function slideTitle() {
-                    let currentTitle = titles[currentTitleIndex];
-                    document.title = currentTitle.slice(position) + " " + currentTitle.slice(0, position);
+                    let titleText = titles[currentTitleIndex];
+                    document.title = titleText.slice(position) + " " + titleText.slice(0, position);
                     position++;
 
-                    if (position > currentTitle.length) {
+                    if (position > titleText.length) {
                         setTimeout(() => {
                             position = 0;
                             currentTitleIndex = (currentTitleIndex + 1) % titles.length;
@@ -35,27 +55,87 @@
                     }
                 }
 
-                setInterval(slideTitle, slideDelay); // Start sliding effect
+                setInterval(slideTitle, slideDelay);
             }
         }
     </script>
+    
+    <!-- Analytics -->
     <script type="module">
         import { inject } from "https://cdn.jsdelivr.net/npm/@vercel/analytics@latest/dist/index.mjs";
         inject();
     </script>
+    
+    <!-- Favicon and Icons -->
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
     <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>    
+    
+    <!-- Fonts with optimized loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/glacial-indifference-2" rel="stylesheet">
+    
+    <!-- reCAPTCHA and Security -->
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
     <meta name="google-site-verification" content="HYy5NXOGEUoAGFEejlnd1KKOl4Ir64d_0IrNUV149Rg" />
+    
+    <!-- Theme and Accessibility -->
+    <meta name="theme-color" content="#1b1f22">
+    <meta name="color-scheme" content="dark">
+    
+    <!-- Performance hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//www.google.com">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sefa Tuter",
+      "jobTitle": "Computer Engineering Student",
+      "description": "Computer Engineering Student",
+      "url": "{{ request.url_root }}",
+      "sameAs": [
+        "https://www.linkedin.com/in/sefatuter/",
+        "https://github.com/sefatuter"
+      ],
+      "knowsAbout": [
+        "Python",
+        "Flask",
+        "Machine Learning",
+        "DevOps",
+        "Web Development",
+        "Computer Engineering"
+      ]
+    }
+    </script>
 </head>
-<body>
-        {% block content %}
-        <!-- This is where child templates will inject their content -->        
-        {% endblock %}
+<body class="{% block body_class %}{% endblock %}">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main" class="sr-only" tabindex="1">Skip to main content</a>
+    
+    {% block content %}
+    <!-- This is where child templates will inject their content -->        
+    {% endblock %}
+    
+    <!-- Global error handling -->
+    <script>
+        // Global error handling for better user experience
+        window.addEventListener('error', function(e) {
+            console.error('Application error:', e.error);
+            // Could add user-friendly error reporting here
+        });
+        
+        // Handle unhandled promise rejections
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Unhandled promise rejection:', e.reason);
+        });
+    </script>
 </body>
 </html>
