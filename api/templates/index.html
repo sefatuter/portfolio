@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+      <div class="alert alert-{{ messages[0][0] }}">{{ messages[0][1] }}</div>  <!-- Show only the first message -->
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
 <!-- Wrapper -->
 <div id="wrapper">
 
@@ -41,15 +52,18 @@
         <!-- Work -->
         <article id="work">
             <h2 class="major">Works</h2>
-            <div class="dropdown">
-                <button onclick="toggleDropdown()" class="dropbtn">Small Projects</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <img src="{{ url_for('static', filename='/images/back1.jpg') }}" style="width: 100%;" class="mx-2 my-3" alt="" />
-                    <a href="{{ url_for('dice') }}">Dice Game</a>
-                    <a href="{{ url_for('drum') }}">Drum Kit Game</a>
-                    <a href="{{ url_for('color') }}">Color Game</a>
-                </div>
-            </div> <br></br>
+            <div>
+                <h4 style="text-decoration: underline;">
+                    <a href="https://github.com/sefatuter/ChatDocs" style="text-decoration: none;">ChatDocs - Assistant</a>
+                </h4>
+                <img src="{{ url_for('static', filename='/images/chatdoc.png') }}" style="width: 100%;" alt="">
+                <p>I developed ChatDocs, a web-based platform that enables secure, on-premise document interaction. 
+                    The platform allows users to upload PDFs or website links and retrieve AI-driven responses based on the content, 
+                    ensuring that sensitive information stays within the user’s environment. By running entirely on the user's own server, 
+                    there is no reliance on external cloud services or third parties, providing enhanced privacy and security.
+                    <br><br> Key Technologies: Python, Flask, LangChain, PostgreSQL, Pgvector, Ollama, Docker, Docker Compose</p>
+            </div>
+            <hr>
             <div>
                 <h4 style="text-decoration: underline;">
                     <a href="https://github.com/sefatuter/Labris-flask" style="text-decoration: none;">Secured User System</a>
@@ -92,6 +106,17 @@
                 <p>It includes the topics I taught myself during my internship.<br><br>
                     Technologies Used: Iptables firewall, Nginx, ModSecurity, Flask, CentOS8, Bash, Linux, Postman, PostgreSQL, Selenium, Vagrant, Ansible, Wireshark, Scapy</p>
             </div>
+
+            <div class="dropdown">
+                <button onclick="toggleDropdown()" class="dropbtn">Small Projects</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <img src="{{ url_for('static', filename='/images/back1.jpg') }}" style="width: 100%;" class="mx-2 my-3" alt="" />
+                    <a href="{{ url_for('dice') }}">Dice Game</a>
+                    <a href="{{ url_for('drum') }}">Drum Kit Game</a>
+                    <a href="{{ url_for('color') }}">Color Game</a>
+                </div>
+            </div>
+            <br><br>
         </article>
 
         <!-- Skills -->
@@ -109,7 +134,7 @@
         <!-- Contact -->
         <article id="contact">
             <h2 class="major">Contact</h2>
-            <form method="post" action="{{ url_for('submit_form') }}">
+            <form method="post" action="{{ url_for('submit_form') }}" onsubmit="return validateForm();">
                 <div class="fields">
                     <div class="field half">
                         <label for="name">Name</label>
@@ -124,11 +149,15 @@
                         <textarea name="message" id="message" rows="4"></textarea>
                     </div>
                 </div>
+
+                <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+                <br>
                 <ul class="actions">
                     <li><input type="submit" value="Send Message" class="primary" /></li>
                     <li><input type="reset" value="Reset" /></li>
                 </ul>
             </form>
+
             <ul class="icons">
                 <li><a href="https://www.linkedin.com/in/sefatuter/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
                 <li><a href="https://github.com/sefatuter" class="icon fa-github"><span class="label">GitHub</span></a></li>
@@ -151,6 +180,7 @@
 <div id="bg"></div>
 
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 
 <!-- Scripts -->
@@ -177,6 +207,54 @@
             }
         }
     }
+
+    function validateForm() {
+        var name = document.getElementById("name").value.trim();
+        var email = document.getElementById("email").value.trim();
+        var message = document.getElementById("message").value.trim();
+        var recaptchaResponse = grecaptcha.getResponse();
+
+        if (name === "" || email === "" || message === "") {
+            flashMessage("Please fill out all fields before submitting.", "danger");
+            return false;
+        }
+
+        if (recaptchaResponse.length === 0) {
+            flashMessage("Please complete the reCAPTCHA verification.", "danger");
+            return false;
+        }
+
+        return true;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const submitButton = form.querySelector("input[type='submit']");
+        const flashContainer = document.getElementById("flash-container");
+
+        form.addEventListener("submit", function (event) {
+            // Prevent duplicate messages
+            if (flashContainer) {
+                flashContainer.remove();
+            }
+
+            // Disable submit button to prevent multiple clicks
+            submitButton.disabled = true;
+            submitButton.value = "Sending...";  // Optional: change button text
+
+            // Automatically remove flash messages after 5 seconds
+            setTimeout(function () {
+                let flashMessage = document.querySelector(".flash-messages");
+                if (flashMessage) {
+                    flashMessage.style.transition = "opacity 0.5s ease-out";
+                    flashMessage.style.opacity = "0";
+                    setTimeout(() => flashMessage.remove(), 500); // Remove after fade-out
+                }
+                submitButton.disabled = false;  // Re-enable button after timeout
+                submitButton.value = "Send Message";
+            }, 5000); // Adjust timing as needed
+        });
+    });
 </script>
 
 {% endblock %}
